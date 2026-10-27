@@ -1,0 +1,16 @@
+{
+  "name": "Track Measure",
+  "short_name": "Tracks",
+  "description": "Measure animal tracks and signs from a photo using a reference object of known size.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f2f2f4",
+  "theme_color": "#1c3d2e",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

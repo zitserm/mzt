@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Track Measure</title>
+  <meta name="description" content="Measure animal tracks and signs from a photo using a reference object of known size.">
+
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#1c3d2e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Track Measure">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="top">
+    <h1>Track Measure</h1>
+    <p class="sub">Photo-based measuring using an object of known size.</p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>1. Photo</h2>
+      <div class="row buttons">
+        <label class="btn primary" for="camera">Take photo</label>
+        <label class="btn" for="library">Choose photo</label>
+        <input id="camera" class="visually-hidden" type="file" accept="image/*" capture="environment">
+        <input id="library" class="visually-hidden" type="file" accept="image/*">
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>2. Reference object</h2>
+      <p class="hint">Place it in the photo on the same surface as the track.</p>
+      <label class="field">
+        <span>Object</span>
+        <select id="reference">
+          <option value="card" selected>Credit card (85.6 mm)</option>
+          <option value="dollar">US dollar coin (26.49 mm)</option>
+          <option value="half">US half dollar (30.61 mm)</option>
+          <option value="quarter">US quarter (24.26 mm)</option>
+          <option value="nickel">US nickel (21.21 mm)</option>
+          <option value="penny">US penny (19.05 mm)</option>
+          <option value="dime">US dime (17.91 mm)</option>
+          <option value="custom">Custom length…</option>
+        </select>
+      </label>
+      <label class="field hidden" id="customRow">
+        <span>Length in mm</span>
+        <input id="customMm" type="number" inputmode="decimal" min="1" step="0.1" placeholder="e.g. 50">
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>3. Mark points</h2>
+      <p id="step" class="step" aria-live="polite">Take or choose a photo to begin.</p>
+      <div class="stage">
+        <canvas id="view" aria-label="Photo. Tap to place points. Pinch to zoom, drag to move."></canvas>
+        <p class="empty hidden" id="empty">No photo yet</p>
+      </div>
+      <p class="hint">Pinch to zoom and drag to move. Tap to place a point. Shoot straight down for best accuracy.</p>
+      <div class="row buttons">
+        <button class="btn" id="undo" type="button">Undo</button>
+        <button class="btn" id="fit" type="button">Fit photo</button>
+        <button class="btn danger" id="clear" type="button">Clear points</button>
+      </div>
+    </section>
+
+    <section class="card results" id="results" aria-live="polite">
+      <h2>Results</h2>
+      <dl>
+        <dt>Length</dt>
+        <dd id="lengthOut">–</dd>
+        <dt>Width</dt>
+        <dd id="widthOut">–</dd>
+      </dl>
+      <p class="hint" id="scaleOut"></p>
+    </section>
+
+    <section class="card tips">
+      <h2>Tips</h2>
+      <ul>
+        <li>Hold the phone directly above the track, parallel to the ground.</li>
+        <li>Put the reference object flat, next to the track, at the same depth.</li>
+        <li>Length and width are measured from the points you tap, so take care to hit the edges.</li>
+        <li>This uses the photo only (the iPhone 11 has no LiDAR), so accuracy is roughly within a few millimetres.</li>
+      </ul>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
