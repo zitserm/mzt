@@ -94,5 +94,11 @@
   </main>
 
   <script src="app.js"></script>
+  <script>
+    // Save the app's files on the phone so it opens without a signal (needs https).
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+  </script>
 </body>
 </html>
