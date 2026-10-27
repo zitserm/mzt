@@ -8,6 +8,7 @@
     nickel: { label: 'nickel', mm: 21.21 },
     penny: { label: 'penny', mm: 19.05 },
     dime: { label: 'dime', mm: 17.91 },
+    finger: { label: 'left index finger', mm: 27.1 },
   };
 
   const STEPS = [
