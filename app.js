@@ -217,9 +217,16 @@
 
   $('undo').addEventListener('click', () => { state.points.pop(); update(); });
   $('clear').addEventListener('click', () => { state.points = []; update(); });
-  $('fit').addEventListener('click', fitPhoto);
+  $('fit').addEventListener('click', () => { resetTouch(); fitPhoto(); });
 
   // ---------- touch: tap to place, drag and pinch to move/zoom ----------
+
+  // Forget every finger we are tracking, so a missed lift can't skew the next pinch.
+  function resetTouch() {
+    state.pointers.clear();
+    state.pinch = null;
+    state.tap = null;
+  }
 
   function localPos(e) {
     const r = canvas.getBoundingClientRect();
@@ -302,7 +309,7 @@
   }
 
   canvas.addEventListener('pointerup', endPointer);
-  canvas.addEventListener('pointercancel', endPointer);
+  canvas.addEventListener('pointercancel', resetTouch);
 
   // Keep the layout right if the phone rotates or the window resizes.
   window.addEventListener('resize', () => {
